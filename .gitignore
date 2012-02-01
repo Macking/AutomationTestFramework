@@ -1,0 +1,14 @@
+#Git ignore files and folders
+/Build
+/bin
+/obj
+*.suo
+*.obj
+*.user
+/AutoIntSysConfig/bin/
+/AutoIntSysConfig/obj/
+/ConfigFile/bin/
+/ConfigFile/obj/
+/QCOTA/bin/
+/QCOTA/obj/
+/QCOperation/obj/
