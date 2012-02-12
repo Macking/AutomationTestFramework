@@ -7,3 +7,4 @@ download test cases' scripts or data files, set test result of test execution,
 write the value of defined field.
 Develop tool:Visual C# 2010 Express
 Addin: Quality Center 10.0 COM Dll
+SCM Tool:git on github.com
