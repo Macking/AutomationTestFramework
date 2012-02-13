@@ -1,5 +1,4 @@
 #Git ignore files and folders
-/Build
 /bin
 /obj
 *.suo

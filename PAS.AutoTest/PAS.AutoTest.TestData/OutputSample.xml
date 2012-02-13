@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TestResult TestCase="key1" RunId="description" Time="dddd">
+  <Round Key="r key1" Des="des r1" Time="">
+    <DataSet>
+      <InputParameters>
+        <Parameter Step="step1" Key="key1">value1</Parameter>
+        <Parameter Step="step1" Key="key1">value1</Parameter>
+        <Parameter Step="step2" Key="key2">value2</Parameter>
+        <Parameter Step="step2" Key="key2">value2</Parameter>
+      </InputParameters>
+      <ExpectedValues>
+        <Parameter Step="step1" Key="key1">Value1</Parameter>
+        <Parameter Step="step1" Key="key2">Value2</Parameter>
+      </ExpectedValues>
+    </DataSet>
+    <CheckPoint Key="c1" Des="">
+      <Outputs>
+        <Parameter Step="step1" Key="key1">value1</Parameter>
+        <Parameter Step="step1" Key="key1">value1</Parameter>
+        <Parameter Step="step2" Key="key2">value2</Parameter>
+        <Parameter Step="step2" Key="key2">value2</Parameter>
+      </Outputs>
+      <Result>Pass</Result>
+      <Message>test message</Message>
+    </CheckPoint>
+  </Round>
+</TestResult>

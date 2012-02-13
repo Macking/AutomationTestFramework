@@ -1,0 +1,77 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{797AAC99-C19D-4DBE-A4F3-BA43201927BC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PAS.AutoTest.Performance.TestCase</RootNamespace>
+    <AssemblyName>PAS.AutoTest.Performance.TestCase</AssemblyName>
+    <SccProjectName>Rational ClearCase</SccProjectName>
+    <SccLocalPath>Rational ClearCase</SccLocalPath>
+    <SccAuxPath>Rational ClearCase</SccAuxPath>
+    <SccProvider>Rational ClearCase</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Build\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\Build\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="KDIS7ATCore, Version=1.2.1.12, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Build\Debug\KDIS7ATCore.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CommonLib.cs" />
+    <Compile Include="TestCases\OpenObjectDebug.cs" />
+    <Compile Include="TestCases\OpenObjectWithCSINotOpen.cs" />
+    <Compile Include="TestCases\AcquireImage.cs" />
+    <Compile Include="TestCases\ImportObject.cs" />
+    <Compile Include="TestCases\CreatePatient.cs" />
+    <Compile Include="ITestCase.cs" />
+    <Compile Include="Log.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestCases\GetSetPS.cs" />
+    <Compile Include="TestCases\GetSetPSInfo.cs" />
+    <Compile Include="TestCases\OpenObjectWithCSIOpened.cs" />
+    <Compile Include="TestCases\SetAsynAcqPatientInfo.cs" />
+    <Compile Include="TestCaseTemplate.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="TestCaseConfig.xml">
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PAS.AutoTest.PasATCore\PAS.AutoTest.PasATCore.csproj">
+      <Project>{3DBF3BE4-7F7D-4187-9F18-3AD1AF3CC490}</Project>
+      <Name>PAS.AutoTest.PasATCore</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

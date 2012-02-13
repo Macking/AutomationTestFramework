@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ActiveMQClient_CPlus", "ActiveMQClient_CPlus.vcproj", "{2D13BF86-D61D-4F53-BD12-7B2CBC89FB2C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2D13BF86-D61D-4F53-BD12-7B2CBC89FB2C}.Debug|Win32.ActiveCfg = Debug|Win32
+		{2D13BF86-D61D-4F53-BD12-7B2CBC89FB2C}.Debug|Win32.Build.0 = Debug|Win32
+		{2D13BF86-D61D-4F53-BD12-7B2CBC89FB2C}.Release|Win32.ActiveCfg = Release|Win32
+		{2D13BF86-D61D-4F53-BD12-7B2CBC89FB2C}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

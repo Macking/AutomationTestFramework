@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Config>
+  <TestCase Name="CreatePatient">
+    <Repeat>60000</Repeat>
+    <Concurrent>1</Concurrent>
+  </TestCase>
+  <TestCase Name="GetSetPSInfo">
+    <Repeat>10000</Repeat>
+    <Concurrent>1</Concurrent>
+  </TestCase>
+  <TestCase Name="GetSetPS">
+    <Repeat>10000</Repeat>
+    <Concurrent>1</Concurrent>
+  </TestCase>
+  <TestCase Name="OpenObjectWithCSINotOpen">
+    <Repeat>10</Repeat>
+    <Concurrent>1</Concurrent>
+  </TestCase>
+  <TestCase Name="ImportObject">
+    <Repeat>10000</Repeat>
+    <Concurrent>1</Concurrent>
+  </TestCase>
+  <TestCase Name="AcquireImage">
+    <Repeat>100</Repeat>
+    <Concurrent>1</Concurrent>
+  </TestCase>
+  <TestCase Name="OpenObjectWithCSIOpened">
+    <Repeat>1000</Repeat>
+    <Concurrent>1</Concurrent>
+  </TestCase>
+  <TestCase Name="SetAsynAcqPatientInfo">
+    <Repeat>1000</Repeat>
+    <Concurrent>1</Concurrent>
+  </TestCase>
+</Config>

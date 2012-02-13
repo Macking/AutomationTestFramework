@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WSDL:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:MIME="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:patient="http://carestreamhealth.com/pas/Patient?wsdl" xmlns:SOAP="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:DIME="http://schemas.xmlsoap.org/ws/2002/04/dime/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tns="http://carestreamhealth.com/pas/Patient?wsdl" xmlns="http://schemas.xmlsoap.org/wsdl/" name="Patient" targetNamespace="http://carestreamhealth.com/pas/Patient?wsdl" xmlns:WSDL="http://schemas.xmlsoap.org/wsdl/">
+  <WSDL:types>
+    <xsd:schema xmlns:patient="http://carestreamhealth.com/pas/Patient?wsdl" xmlns="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://carestreamhealth.com/pas/Patient?wsdl">
+      <xsd:import schemaLocation="Patient?xsd=encoding.xsd" namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <xsd:element name="createPatient">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element form="unqualified" name="patientInfo" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="listObject">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element form="unqualified" name="filter" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setPatient">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element form="unqualified" name="patientInfo" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="findPatient">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element form="unqualified" name="filter" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getPatient">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element form="unqualified" name="patientId" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="createPatientResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element form="unqualified" name="result" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="listObjectResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element form="unqualified" name="result" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="setPatientResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element form="unqualified" name="result" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="findPatientResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element form="unqualified" name="result" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="getPatientResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element form="unqualified" name="result" type="xsd:string" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+    </xsd:schema>
+  </WSDL:types>
+  <WSDL:message name="createPatientResponse">
+    <WSDL:part name="result" type="xsd:string" />
+  </WSDL:message>
+  <WSDL:message name="findPatientResponse">
+    <WSDL:part name="result" type="xsd:string" />
+  </WSDL:message>
+  <WSDL:message name="setPatientResponse">
+    <WSDL:part name="result" type="xsd:string" />
+  </WSDL:message>
+  <WSDL:message name="findPatientRequest">
+    <WSDL:part name="filter" type="xsd:string" />
+  </WSDL:message>
+  <WSDL:message name="getPatientRequest">
+    <WSDL:part name="patientId" type="xsd:string" />
+  </WSDL:message>
+  <WSDL:message name="listObjectResponse">
+    <WSDL:part name="result" type="xsd:string" />
+  </WSDL:message>
+  <WSDL:message name="getPatientResponse">
+    <WSDL:part name="result" type="xsd:string" />
+  </WSDL:message>
+  <WSDL:message name="setPatientRequest">
+    <WSDL:part name="patientInfo" type="xsd:string" />
+  </WSDL:message>
+  <WSDL:message name="listObjectRequest">
+    <WSDL:part name="filter" type="xsd:string" />
+  </WSDL:message>
+  <WSDL:message name="createPatientRequest">
+    <WSDL:part name="patientInfo" type="xsd:string" />
+  </WSDL:message>
+  <WSDL:portType name="PatientPortType">
+    <WSDL:operation name="createPatient">
+      <documentation>To create a Patient.</documentation>
+      <WSDL:input message="tns:createPatientRequest" />
+      <WSDL:output message="tns:createPatientResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="setPatient">
+      <documentation>To associate data to a considered patient.</documentation>
+      <WSDL:input message="tns:setPatientRequest" />
+      <WSDL:output message="tns:setPatientResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="getPatient">
+      <documentation>To retrieve data associated to a patient.</documentation>
+      <WSDL:input message="tns:getPatientRequest" />
+      <WSDL:output message="tns:getPatientResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="listObject">
+      <documentation>To get a list of imaging objects belonging to a patient. This list can be filtered on one or several objects's attributes.</documentation>
+      <WSDL:input message="tns:listObjectRequest" />
+      <WSDL:output message="tns:listObjectResponse" />
+    </WSDL:operation>
+    <WSDL:operation name="findPatient">
+      <documentation>To find a patient according to its name, external id, ...</documentation>
+      <WSDL:input message="tns:findPatientRequest" />
+      <WSDL:output message="tns:findPatientResponse" />
+    </WSDL:operation>
+  </WSDL:portType>
+  <WSDL:binding name="Patient" type="tns:PatientPortType">
+    <SOAP:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <WSDL:operation name="createPatient">
+      <SOAP:operation soapAction="" style="rpc" />
+      <WSDL:input>
+        <SOAP:body use="encoded" namespace="http://carestreamhealth.com/pas/Patient?wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="encoded" namespace="http://carestreamhealth.com/pas/Patient?wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="setPatient">
+      <SOAP:operation soapAction="" style="rpc" />
+      <WSDL:input>
+        <SOAP:body use="encoded" namespace="http://carestreamhealth.com/pas/Patient?wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="encoded" namespace="http://carestreamhealth.com/pas/Patient?wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="getPatient">
+      <SOAP:operation soapAction="" style="rpc" />
+      <WSDL:input>
+        <SOAP:body use="encoded" namespace="http://carestreamhealth.com/pas/Patient?wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="encoded" namespace="http://carestreamhealth.com/pas/Patient?wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="listObject">
+      <SOAP:operation soapAction="" style="rpc" />
+      <WSDL:input>
+        <SOAP:body use="encoded" namespace="http://carestreamhealth.com/pas/Patient?wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="encoded" namespace="http://carestreamhealth.com/pas/Patient?wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </WSDL:output>
+    </WSDL:operation>
+    <WSDL:operation name="findPatient">
+      <SOAP:operation soapAction="" style="rpc" />
+      <WSDL:input>
+        <SOAP:body use="encoded" namespace="http://carestreamhealth.com/pas/Patient?wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </WSDL:input>
+      <WSDL:output>
+        <SOAP:body use="encoded" namespace="http://carestreamhealth.com/pas/Patient?wsdl" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </WSDL:output>
+    </WSDL:operation>
+  </WSDL:binding>
+  <WSDL:service name="Patient">
+    <documentation>Patient Service</documentation>
+    <WSDL:port name="Patient" binding="tns:Patient">
+      <SOAP:address location="http://127.0.0.1:8080/axis2/services/Patient/" />
+    </WSDL:port>
+  </WSDL:service>
+</WSDL:definitions>

@@ -1,0 +1,16 @@
+<Config>
+  <ServiceWsdl>
+    <Wsdl Name="Acquisition">http://localhost:8080/pas/services/AcquisitionService?wsdl</Wsdl>
+    <Wsdl Name="Analysis">http://localhost:8080/pas/services/AnalysisService?wsdl</Wsdl>
+    <Wsdl Name="Application">http://localhost:8080/pas/services/ApplicationService?wsdl</Wsdl>
+    <Wsdl Name="Image">http://localhost:8080/pas/services/ImageService?wsdl</Wsdl>
+    <Wsdl Name="Patient">http://localhost:8080/pas/services/PatientService?wsdl</Wsdl>
+    <Wsdl Name="FMS">http://localhost:8080/pas/services/FMSService?wsdl</Wsdl>
+    <Wsdl Name="PresentationState">http://localhost:8080/pas/services/PresentationStateService?wsdl</Wsdl>
+    <Wsdl Name="Study">http://localhost:8080/pas/services/StudyService?wsdl</Wsdl>
+    <Wsdl Name="Import">http://localhost:8080/pas/services/ImportService?wsdl</Wsdl>
+    <Wsdl Name="SimpleInstance">http://localhost:8080/pas/services/SimpleInstanceService?wsdl</Wsdl>
+    <Wsdl Name="GenericInstance">http://localhost:8080/pas/services/GenericInstanceService?wsdl</Wsdl>    
+    <Wsdl Name="Radiolog">http://localhost:8080/pas/services/RadiologicalLogService?wsdl</Wsdl>
+  </ServiceWsdl>
+</Config>

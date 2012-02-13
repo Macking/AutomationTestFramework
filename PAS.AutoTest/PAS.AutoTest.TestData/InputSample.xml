@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Input Des="description for this input file purpose.">
+  <DataSet Key="key1" Des="Description for Dataset 1">
+    <InputParameters>
+      <Parameter Step="step1" Key="key1">value1</Parameter>
+      <Parameter Step="step1" Key="key1">value1</Parameter>
+      <Parameter Step="step2" Key="key2">value2</Parameter>
+      <Parameter Step="step2" Key="key2">value2</Parameter>
+    </InputParameters>
+    <ExpectedValues>
+      <Parameter Step="step1" Key="key1">Value1</Parameter>
+      <Parameter Step="step1" Key="key2">Value2</Parameter>
+    </ExpectedValues>
+  </DataSet>
+  <DataSet Key="key2" Des="Description for Dataset 2">
+    <InputParameters>
+      <Parameter Step="step1" Key="key1">Value1</Parameter>
+      <Parameter Step="step1" Key="key2">Value2</Parameter>
+      <Parameter Step="step2" Key="key3">Value3</Parameter>
+      <Parameter Step="step2" Key="key4">Value4</Parameter>
+    </InputParameters>
+    <ExpectedValues>
+      <Parameter Step="step1" Key="key1">Value1</Parameter>
+      <Parameter Step="step1" Key="key2">Value2</Parameter>
+    </ExpectedValues>
+  </DataSet>
+</Input>

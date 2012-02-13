@@ -1,0 +1,167 @@
+using PAS.AutoTest.TestData;
+using PAS.AutoTest.PasATCore;
+using System;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
+
+namespace CaseRunner
+{
+    public class Runner
+    {
+        private OutputData mOutput = new OutputData(); 
+        private string mLastOutput = "LastOutput.xml";
+        private string mInputDataPath = @@INPUT@@;
+        private InputData Input = null;
+        
+        //add by macking 8/18 begin
+		public string runningContent = string.Empty;
+		public bool runningError = true;
+		//add by macking 8/18 end
+
+        public Runner()
+        {
+            if (mInputDataPath == string.Empty)
+                Input = new InputData();
+            else
+                Input = new InputData(mInputDataPath);
+        }
+        
+        private void SaveRound(Round r)
+        {
+            this.mOutput.Rounds.Add(r);
+        }
+
+        private Round NewRound(string key, string description)
+        {
+            Round r = new Round(key, description);
+            return r;
+        }
+
+        private void Output()
+        {
+            this.mOutput.ConvertToXml(this.mLastOutput);
+        }
+        
+        [DllImport("user32.dll")]
+        static extern IntPtr FindWindowEx(IntPtr hwndParent, IntPtr hwndChildAfter, string lpszClass, string lpszWindow);
+
+        [DllImport("user32.dll")]
+        private extern static IntPtr GetDesktopWindow();
+
+        [DllImport("user32.dll")]
+        static extern IntPtr PostMessage(IntPtr hwnd, uint Msg, int wParam, int lParam);
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr GetDlgCtrlID(IntPtr HWND);
+
+        public static bool AcqPanoImage(int timeOut)
+        {
+            return ClickAcqButton("IDC_BUTTON_ETATPRET", timeOut);
+        }
+
+        public static bool AcqCephImage(int timeOut)
+        {
+            return ClickAcqButton("IDC_BUTTON_ETATPRET", timeOut);
+        }
+
+        public static bool AcqCRImage(int timeOut)
+        {
+            return ClickAcqButton("DSCAN", timeOut);
+        }
+        
+		public static bool AcqTWAINImage(int timeOut)
+        {
+            return ClickAcqButton("SCAN", timeOut);
+        }
+
+        private static bool ClickAcqButton(string btnName, int timeOut)
+        {
+            bool result = false;
+
+            int attemp = 0;
+            IntPtr desktop = GetDesktopWindow();
+            IntPtr child = FindWindowEx(desktop, IntPtr.Zero, null, null);
+            IntPtr c = IntPtr.Zero;
+
+            while (child != IntPtr.Zero)
+            {
+                c = FindWindowEx(child, IntPtr.Zero, null, btnName);
+
+                if (c != IntPtr.Zero)
+                {
+                    PostMessage(c, 0x0201, 0, 0);
+                    PostMessage(c, 0x0202, 0, 0);
+
+                    while (c != IntPtr.Zero && attemp != timeOut)
+                    {
+                        System.Threading.Thread.Sleep(1000);
+                        c = FindWindowEx(child, IntPtr.Zero, null, btnName);
+                        attemp++;
+                    }
+
+                    if (c == IntPtr.Zero)
+                        result = true;
+
+                    break;
+                }
+                child = FindWindowEx(desktop, child, null, null);
+            }
+
+            return result;
+        }
+
+        public static bool AcqFMS(int waitTime, int timeOut)
+        {
+            bool result = false;
+
+            int attemp = 0;
+            IntPtr desktop = GetDesktopWindow();
+            IntPtr acqPanel = FindWindowEx(desktop, IntPtr.Zero, null, null);
+            IntPtr c = IntPtr.Zero;
+
+            while (acqPanel != IntPtr.Zero)
+            {
+                c = FindWindowEx(acqPanel, IntPtr.Zero, null, "FMSPanelWnd");
+
+                if (c != IntPtr.Zero)
+                {
+                    IntPtr btnClose = FindWindowEx(acqPanel, IntPtr.Zero, null, null);
+
+                    while (btnClose != IntPtr.Zero)
+                    {
+                        int id = (int)(GetDlgCtrlID(btnClose));
+
+                        if (id == 6054)
+                        {
+                            System.Threading.Thread.Sleep(waitTime * 1000);
+                            PostMessage(btnClose, 0x0201, 0, 0);
+                            PostMessage(btnClose, 0x0202, 0, 0);
+                            break;
+                        }
+
+                        btnClose = FindWindowEx(acqPanel, btnClose, null, null);
+                    }
+
+                    while (c != IntPtr.Zero && attemp != timeOut)
+                    {
+                        System.Threading.Thread.Sleep(1000);
+                        c = FindWindowEx(acqPanel, IntPtr.Zero, null, "wxCellContainerFMS");
+                        attemp++;
+                    }
+
+                    if (c == IntPtr.Zero)
+                        result = true;
+
+                    break;
+                }
+
+                acqPanel = FindWindowEx(desktop, acqPanel, null, null);
+            }
+
+            return result;
+        }
+        
+        @@RUN@@
+    }
+}

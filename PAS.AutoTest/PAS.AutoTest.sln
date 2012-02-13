@@ -1,0 +1,77 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PAS.AutoTest.TestData", "PAS.AutoTest.TestData\PAS.AutoTest.TestData.csproj", "{E1CC530A-83E7-475C-BB0D-40CDD4DBAC84}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PAS.AutoTest.PasATCore", "PAS.AutoTest.PasATCore\PAS.AutoTest.PasATCore.csproj", "{3DBF3BE4-7F7D-4187-9F18-3AD1AF3CC490}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PAS.AutoTest.ScriptRunner", "PAS.AutoTest.ScriptRunner\PAS.AutoTest.ScriptRunner.csproj", "{D8918D45-A656-4EC6-9A74-7D9D0ACE8752}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PAS.AutoTest.ScriptRunner.Tester", "PAS.AutoTest.ScriptRunner.Tester\PAS.AutoTest.ScriptRunner.Tester.csproj", "{4B0C9EDB-A4CB-441A-8499-2783CECD743D}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PAS.AutoTest.TestData.Testser", "PAS.AutoTest.TestData.Testser\PAS.AutoTest.TestData.Testser.csproj", "{AE246EFF-24D1-485F-AFE6-043CC8A9B25E}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PAS.AutoTest.TestData.DataManager", "PAS.AutoTest.TestDataManager\PAS.AutoTest.TestData.DataManager.csproj", "{E49F1E07-2889-4C06-A6B7-81AD7823AEB0}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(RationalClearCase) = preSolution
+		SourceControlProvider = RationalClearCase
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E1CC530A-83E7-475C-BB0D-40CDD4DBAC84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1CC530A-83E7-475C-BB0D-40CDD4DBAC84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1CC530A-83E7-475C-BB0D-40CDD4DBAC84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1CC530A-83E7-475C-BB0D-40CDD4DBAC84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DBF3BE4-7F7D-4187-9F18-3AD1AF3CC490}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DBF3BE4-7F7D-4187-9F18-3AD1AF3CC490}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DBF3BE4-7F7D-4187-9F18-3AD1AF3CC490}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DBF3BE4-7F7D-4187-9F18-3AD1AF3CC490}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8918D45-A656-4EC6-9A74-7D9D0ACE8752}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8918D45-A656-4EC6-9A74-7D9D0ACE8752}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8918D45-A656-4EC6-9A74-7D9D0ACE8752}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8918D45-A656-4EC6-9A74-7D9D0ACE8752}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B0C9EDB-A4CB-441A-8499-2783CECD743D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B0C9EDB-A4CB-441A-8499-2783CECD743D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B0C9EDB-A4CB-441A-8499-2783CECD743D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B0C9EDB-A4CB-441A-8499-2783CECD743D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE246EFF-24D1-485F-AFE6-043CC8A9B25E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE246EFF-24D1-485F-AFE6-043CC8A9B25E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE246EFF-24D1-485F-AFE6-043CC8A9B25E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE246EFF-24D1-485F-AFE6-043CC8A9B25E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E49F1E07-2889-4C06-A6B7-81AD7823AEB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E49F1E07-2889-4C06-A6B7-81AD7823AEB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E49F1E07-2889-4C06-A6B7-81AD7823AEB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E49F1E07-2889-4C06-A6B7-81AD7823AEB0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,2 @@
+call classpath.bat
+java com.carestreamhealth.pas.notification.SimpleMsConsumerTest

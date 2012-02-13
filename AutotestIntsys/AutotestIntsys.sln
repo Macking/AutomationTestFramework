@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual C# Express 2010
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutotestIntsys", "AutotestIntsys.csproj", "{AFBDE0DE-D060-4643-96EC-91B24BA87D8A}"
 	ProjectSection(ProjectDependencies) = postProject
 		{0DCD58F3-9FC4-47F0-B755-19ED241192EB} = {0DCD58F3-9FC4-47F0-B755-19ED241192EB}

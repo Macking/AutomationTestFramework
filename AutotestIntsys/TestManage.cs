@@ -355,7 +355,13 @@ namespace AutotestIntsys
       if (isQTPRun)
       {
         #region Using QTP
-        TSScheduler Scheduler = RunSet.StartExecution("") as TSScheduler;
+
+        TSTestFactory TSTestFact = RunSet.TSTestFactory as TSTestFactory;
+        List runList = new List();
+        runList = TSTestFact.NewList("") as List;
+        if (runList.Count < 1)
+          return;
+        TSScheduler Scheduler = RunSet.StartExecution("localhost") as TSScheduler;
         if (destMachine == "localhost")
           Scheduler.RunAllLocally = true;
         else
@@ -364,8 +370,7 @@ namespace AutotestIntsys
         try
         {
           Debug.Print("AutoIntSys: Run Start at: " + TestUtility.GetCurrentTime());
-          //Console.WriteLine("Run Start at: {0}", TestUtility.GetCurrentTime());
-          Scheduler.Run("all");
+          Scheduler.Run(runList);
         }
         catch (Exception e)
         {
@@ -378,7 +383,7 @@ namespace AutotestIntsys
         bool isRunFinished = false;
         while (!isRunFinished)
         {
-          execStatus.RefreshExecStatusInfo("all", true);
+          execStatus.RefreshExecStatusInfo(runList, true);
           isRunFinished = execStatus.Finished;
           System.Threading.Thread.Sleep(5000);
         }
