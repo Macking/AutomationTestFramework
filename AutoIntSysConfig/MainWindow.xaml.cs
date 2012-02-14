@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Forms;
 
 //using AutoTestComponent;
 
@@ -68,11 +69,11 @@ namespace AutoTestComponent
                     isAutoSelectProject = false;
                 }
                 else
-                    MessageBox.Show("Can't serialize this XML file!");
+                    System.Windows.MessageBox.Show("Can't serialize this XML file!");
             }
             else
             {
-                MessageBox.Show("Can't load file!");
+                System.Windows.MessageBox.Show("Can't load file!");
             }
             //FileStream fs = new FileStream();
 
@@ -89,7 +90,7 @@ namespace AutoTestComponent
 
             if (System.IO.File.Exists(configFilePath.Text))
             {
-                switch (MessageBox.Show("Do you want to overwrite the config file?", "Please confirm", MessageBoxButton.YesNoCancel))
+                switch (System.Windows.MessageBox.Show("Do you want to overwrite the config file?", "Please confirm", MessageBoxButton.YesNoCancel))
                 {
                     case MessageBoxResult.Yes:
                         //TestConfigFile tConfig = new TestConfigFile();
@@ -221,7 +222,19 @@ namespace AutoTestComponent
 
         private void selectFile_Click(object sender, RoutedEventArgs e)
         {
+            OpenFileDialog opd = new OpenFileDialog();
+            opd.Title = "Select a configration file...";
+            opd.Filter = "Configration Files(*.xml)|*.xml|All Files|*.*";
+            opd.ValidateNames = true;
+            opd.CheckPathExists = true;
+            opd.CheckFileExists = true;
 
+            DialogResult dr = new DialogResult(); 
+            dr = opd.ShowDialog();
+            if (dr.ToString() == "OK")
+            {
+                configFilePath.Text = opd.FileName;
+            }           
         }
 
     }
