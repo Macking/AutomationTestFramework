@@ -29,7 +29,7 @@ Imports TDAPIOLELib
 Public Class QCAttachment
     'It can provide to customer
     ' Private -> Public
-    Private Function DownloadAttachment(ByVal tdConn As TDConnection, _
+    Private Function DownloadAttachment(ByVal tdConn As TDConnectionClass, _
                                        ByVal type As String, _
                                        ByVal OutPath As String, _
                                        ByVal id As String)
@@ -95,7 +95,7 @@ Public Class QCAttachment
     End Function
 
     'Intenal function
-    Private Function GetAttachmentFromTest(ByVal tdConn As TDConnection, _
+    Private Function GetAttachmentFromTest(ByVal tdConn As TDConnectionClass, _
                                          ByVal id As String, _
                                          ByVal fileName As String, _
                                          ByVal outPath As String)
@@ -199,7 +199,7 @@ Public Class QCAttachment
     ' Get an attachment from another test
     ' It can be open to the customer
     ' Private -> Public
-    Private Function GetAttachmentFromTestName(ByVal tdConn As TDConnection, _
+    Private Function GetAttachmentFromTestName(ByVal tdConn As TDConnectionClass, _
                                               ByVal TestName As String, _
                                               ByVal FileName As String, _
                                               ByVal OutPath As String)
@@ -217,7 +217,7 @@ Public Class QCAttachment
     End Function
 
     'Attach an attachment file to run, if the filename already exist, the upload will over the old one
-    Private Function AttachFileToRun(ByVal tdConn As TDConnection, _
+    Private Function AttachFileToRun(ByVal tdConn As TDConnectionClass, _
                                          ByVal Id As String, _
                                          ByVal FileName As String, _
                                          ByVal FilePath As String)
@@ -268,7 +268,7 @@ Public Class QCAttachment
     End Function
 
     'Attach an attachment file to test, if the filename already exist, the upload will over the old one
-    Private Function AttachFileToTest(ByVal tdConn As TDConnection, _
+    Private Function AttachFileToTest(ByVal tdConn As TDConnectionClass, _
                                          ByVal Id As String, _
                                          ByVal FileName As String, _
                                          ByVal FilePath As String)
@@ -321,14 +321,14 @@ Public Class QCAttachment
     ''' Upload attachment to QC
     ''' <para>Only implement the RUN and TEST type</para>
     ''' </summary>
-    ''' <param name="TdConn">TDConnection TdConn, should be using OTA initial the connection</param>
+    ''' <param name="TdConn">TDConnectionClass TdConn, should be using OTA initial the connection</param>
     ''' <param name="Type">String Type, It's value can be TEST, RUN, STEP or others</param>
     ''' <param name="Id">String Id, Match Type's id value</param>
     ''' <param name="FileName">String FileName, The file name you want to upload</param>
     ''' <param name="UploadPath">String UploadPath, The local path which your upload file located</param>
     ''' <returns>The return is Ture or False</returns>
     ''' <remarks></remarks>
-    Public Function UploadAttachment(ByVal TdConn As TDConnection, _
+    Public Function UploadAttachment(ByVal TdConn As TDConnectionClass, _
                                     ByVal Type As String, _
                                     ByVal Id As String, _
                                     ByVal FileName As String, _
@@ -360,14 +360,14 @@ Public Class QCAttachment
     ''' Download attachment from QC
     ''' <para>Only implement the TEST type</para>
     ''' </summary>
-    ''' <param name="TdConn">TDConnection TdConn, should be using OTA initial the connection</param>
+    ''' <param name="TdConn">TDConnectionClass TdConn, should be using OTA initial the connection</param>
     ''' <param name="Type">String Type, It's value can be TEST, RUN, STEP or others</param>
     ''' <param name="Id">String Id, Match Type's id value</param>
     ''' <param name="FileName">String FileName, The file name you want to download</param>
     ''' <param name="DownloadPath">String DownloadPath, The local path that you want to save the file(s)</param>
     ''' <returns>StringArray, the download file(s) local path array </returns>
     ''' <remarks></remarks>
-    Public Function DownloadAttachment(ByVal TdConn As TDConnection, _
+    Public Function DownloadAttachment(ByVal TdConn As TDConnectionClass, _
                                        ByVal Type As String, _
                                        ByVal Id As String, _
                                        ByVal FileName As String, _

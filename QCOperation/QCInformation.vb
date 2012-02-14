@@ -36,13 +36,13 @@ Public Class QCInformation
     ''' Write the test instance summary information
     ''' <para>Such as NumOfPass and NumOfTotal</para>
     ''' </summary>
-    ''' <param name="TdConn">TDConnection TdConn, should be using OTA initial the connection</param>
+    ''' <param name="TdConn">TDConnectionClass TdConn, should be using OTA initial the connection</param>
     ''' <param name="Id">String Id, Test Instance's id value</param>
     ''' <param name="FieldName">String FieldName, The field you want to add value</param>
     ''' <param name="FieldValue">String FieldValue, The value you want to add field</param>
     ''' <returns>The return is Ture or False</returns>
     ''' <remarks></remarks>
-    Public Function SetTestInstanceSummary(ByVal TdConn As TDConnection, _
+    Public Function SetTestInstanceSummary(ByVal TdConn As TDConnectionClass, _
                                            ByVal Id As String, _
                                            ByVal FieldName As String, _
                                            ByVal FieldValue As String) As Boolean
@@ -65,13 +65,13 @@ Public Class QCInformation
     ''' Add the test run of status to a related test instance
     ''' <para>It will be shown as Pass or Fail</para>
     ''' </summary>
-    ''' <param name="TdConn">TDConnection TdConn, should be using OTA initial the connection</param>
+    ''' <param name="TdConn">TDConnectionClass TdConn, should be using OTA initial the connection</param>
     ''' <param name="Id">String Id, Test RUN's id value</param>
     ''' <param name="Status">String Status, Which you want to set status to QC in this test run
     ''' <para>it can be only given as: "Not Completed","Passed","Failed","N/A", and other value will be assign to "No Run" </para></param>
     ''' <returns>The return is Ture or False</returns>
     ''' <remarks></remarks>
-    Public Function SetTestRunStatus(ByVal TdConn As TDConnection, _
+    Public Function SetTestRunStatus(ByVal TdConn As TDConnectionClass, _
                                      ByVal Id As String, _
                                      ByVal Status As String) As Boolean
         Dim Result As Boolean
@@ -91,14 +91,14 @@ Public Class QCInformation
     ''' Add the test steps to test run
     ''' <para>You can add steps as you want</para>
     ''' </summary>
-    ''' <param name="TdConn">TDConnection TdConn, should be using OTA initial the connection</param>
+    ''' <param name="TdConn">TDConnectionClass TdConn, should be using OTA initial the connection</param>
     ''' <param name="Id">String Id, Test RUN's id value</param>
     ''' <param name="StepName">String StepName, The name of step you can set</param>
     ''' <param name="StepStatus">String StepStatus, The status of step you set
     ''' <para>it can be only given as: "Not Completed","Passed","Failed","N/A", and other value will be assign to "No Run" </para></param>
     ''' <returns>The return is Ture or False</returns>
     ''' <remarks></remarks>
-    Public Function SetTestRunStep(ByVal TdConn As TDConnection, _
+    Public Function SetTestRunStep(ByVal TdConn As TDConnectionClass, _
                                    ByVal Id As String, _
                                    ByVal StepName As String, _
                                    ByVal StepStatus As String) As Boolean

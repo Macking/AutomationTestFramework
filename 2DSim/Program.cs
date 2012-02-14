@@ -10,6 +10,7 @@ using System.Text;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using System.Diagnostics;
 using System.Collections.Generic;
 
 namespace TwoDSim
@@ -258,7 +259,9 @@ namespace TwoDSim
         byte[] feedback = Encoding.ASCII.GetBytes((string)retMessage);
         ns.Write(feedback, 0, feedback.Length);
 
+        Debug.Print("2D Simulator: Recv from PAS <{0}> byte", res);
         Console.WriteLine("Recv from PAS:{0} byte", res);
+        Debug.Print("2D Simulator: Content <{0}>", sb);
         Console.WriteLine("Content: {0}", sb);
         //Console.Read();
         ns.Close();
@@ -274,6 +277,7 @@ namespace TwoDSim
       {
         //Console.WriteLine("{0}", e);
         Console.WriteLine("Thread Abort");
+        Debug.Print("Thread Abort");
         //tcpClient.Close();
         //tcpListener.Stop();
       }      

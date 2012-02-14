@@ -9,7 +9,7 @@ Imports System.Runtime.InteropServices
 ' Review the values of the assembly attributes
 
 <Assembly: AssemblyTitle("QCOperation")> 
-<Assembly: AssemblyDescription("")> 
+<Assembly: AssemblyDescription("QC operation component")> 
 <Assembly: AssemblyCompany("Carestream Health Inc.")> 
 <Assembly: AssemblyProduct("QCOperation")> 
 <Assembly: AssemblyCopyright("Copyright © Carestream Health Inc. 2011")> 
