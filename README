@@ -1,10 +1,11 @@
 This is a project for automation test framework.
-It can be integrated with ANT to daily build.
-You should add some scripts to depoly your target program.
-This test framework support QTP and user custom program.
+It can be integrated with ANT for daily builds.
+You should add some scripts to deploy your target program.
+This test framework supports QTP and user custom programs.
 It can be interactive with Quality Center, include upload test log files,
 download test cases' scripts or data files, set test result of test execution,
 write the value of defined field.
+
 Develop tool:Visual C# 2010 Express
 Addin: Quality Center 10.0 COM Dll
 SCM Tool:git on github.com
