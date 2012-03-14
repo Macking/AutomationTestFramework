@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TestConfigFile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <QCConnect>
+    <ServerAddr>http://localhost:8080/qcbin/</ServerAddr>
+    <Domain>TEST</Domain>
+    <Project>TEST</Project>
+    <LoginName>demo</LoginName>
+    <Password>demo</Password>
+  </QCConnect>
+  <CaseFilter>
+    <TestSetName>TS_USER_08</TestSetName>
+    <AutorunFilter>
+      <FieldName>TS_ATTACHMENT</FieldName>
+      <FieldValue>Y</FieldValue>
+    </AutorunFilter>
+    <AutorunFilter>
+      <FieldName>TS_USER_09</FieldName>
+      <FieldValue>Auto</FieldValue>
+    </AutorunFilter>
+  </CaseFilter>
+  <RunParameter>
+    <TestMachine>localhost</TestMachine>
+    <UsingQTP>false</UsingQTP>
+    <CustomerTestPro>CustomerTestPro.xxxTestProcedure</CustomerTestPro>
+    <DownloadFile>*.IOD</DownloadFile>
+    <DownloadFile>*.COD</DownloadFile>
+    <NumOfPassed>TC_USER_02</NumOfPassed>
+    <NumOfTotal>TC_USER_03</NumOfTotal>
+  </RunParameter>
+  <TestLog>
+    <TestlogPath xsi:nil="true" />
+  </TestLog>
+</TestConfigFile>
