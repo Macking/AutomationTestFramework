@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DesEncDec.cs" />
     <Compile Include="TestConfigUtility.cs" />
     <Compile Include="TestConfigFile.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

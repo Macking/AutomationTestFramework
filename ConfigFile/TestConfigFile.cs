@@ -96,10 +96,16 @@ namespace AutoTestComponent
 
             private string PasswordField;
             [XmlElementAttribute(IsNullable = false)]
+            //public string Password
+            //{
+            //    get { return this.PasswordField; }
+            //    set { this.PasswordField = value; }
+            //}
+            //Use DES to Encrypt and Decrypt string
             public string Password
             {
-                get { return this.PasswordField; }
-                set { this.PasswordField = value; }
+                get { return DesEncDec.Decrypt(this.PasswordField); }
+                set { this.PasswordField = DesEncDec.Encrypt(value); }
             }
         }
 

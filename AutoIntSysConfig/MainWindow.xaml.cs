@@ -50,7 +50,7 @@ namespace AutoTestComponent
                     qcServerAddr.Text = tConfig.QCConnect.ServerAddr;
 
                     qcLoginName.Text = tConfig.QCConnect.LoginName;
-                    qcLoginPassword.Text = tConfig.QCConnect.Password;
+                    qcLoginPassword.Text = DesEncDec.Decrypt(tConfig.QCConnect.Password);
                     strDomainName = tConfig.QCConnect.Domain;
                     strProjectName = tConfig.QCConnect.Project;
                     
@@ -86,7 +86,7 @@ namespace AutoTestComponent
             t.TestConfigString.QCConnect.Project = strProjectName;
             t.TestConfigString.QCConnect.ServerAddr = qcServerAddr.Text;
             t.TestConfigString.QCConnect.LoginName = qcLoginName.Text;
-            t.TestConfigString.QCConnect.Password = qcLoginPassword.Text;
+            t.TestConfigString.QCConnect.Password = DesEncDec.Encrypt(qcLoginPassword.Text);
 
             if (System.IO.File.Exists(configFilePath.Text))
             {
@@ -222,6 +222,7 @@ namespace AutoTestComponent
 
         private void selectFile_Click(object sender, RoutedEventArgs e)
         {
+            
             OpenFileDialog opd = new OpenFileDialog();
             opd.Title = "Select a configration file...";
             opd.Filter = "Configration Files(*.xml)|*.xml|All Files|*.*";
