@@ -1,9 +1,14 @@
-using PAS.AutoTest.TestData;
-using PAS.AutoTest.PasATCore;
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using System.Threading;
+using PAS.AutoTest.TestData;
+using PAS.AutoTest.PasATCore;
+using PAS.AutoTest.PasATCoreV2;
+using PAS.AutoTest.TestUtility;
+using NotificationSim;
+using System.Collections.Generic;
 
 namespace CaseRunner
 {
@@ -12,13 +17,26 @@ namespace CaseRunner
         private OutputData mOutput = new OutputData(); 
         private string mLastOutput = "LastOutput.xml";
         private string mInputDataPath = @@INPUT@@;
-        private InputData Input = null;
-        
+		
         //add by macking 8/18 begin
-		public string runningContent = string.Empty;
-		public bool runningError = true;
-		//add by macking 8/18 end
+        private string runningReturn = string.Empty;
+        //private bool runningStatus = false;
+        //add by macking 8/18 end
+		
+        private InputData Input = null;
+        private Thread NotificationLaunchThread;
+        private Process p;
 
+		public string getRunReturn()
+		{
+			return this.runningReturn;
+		}
+		
+		//public bool getRunStatus()
+		//{
+		//	return this.runningStatus;
+		//}
+		
         public Runner()
         {
             if (mInputDataPath == string.Empty)
@@ -40,7 +58,9 @@ namespace CaseRunner
 
         private void Output()
         {
+			//modify by macking 8/19
             this.mOutput.ConvertToXml(this.mLastOutput);
+			runningReturn = this.mOutput.ConvertToString();
         }
         
         [DllImport("user32.dll")]
@@ -55,6 +75,15 @@ namespace CaseRunner
         [DllImport("user32.dll")]
         private static extern IntPtr GetDlgCtrlID(IntPtr HWND);
 
+		[DllImport("csdminterfacetest.dll")]
+		public extern static int DICOMDIR_test();
+		
+		[DllImport("csdminterfacetest.dll")]
+		public extern static int version_test();
+		
+		[DllImport("csdminterfacetest.dll")]
+		public extern static int listObject_test();
+		
         public static bool AcqPanoImage(int timeOut)
         {
             return ClickAcqButton("IDC_BUTTON_ETATPRET", timeOut);
@@ -69,10 +98,37 @@ namespace CaseRunner
         {
             return ClickAcqButton("DSCAN", timeOut);
         }
-        
+
 		public static bool AcqTWAINImage(int timeOut)
         {
             return ClickAcqButton("SCAN", timeOut);
+        }
+
+		public static bool Acq3DVolume(int timeOut)
+		{
+		  return ClickAcqButton("IDC_BUTTON_ETATPRET", timeOut);
+		}
+
+        public void LaunchNotification()
+        {
+          ThreadStart entryPoint = new ThreadStart(RunCmd);
+          NotificationLaunchThread = new Thread(entryPoint);
+          NotificationLaunchThread.Name = "NOTIFICATION_RUNNING";
+          NotificationLaunchThread.Start();
+        }
+
+        public void FinishNotification()
+        {
+          p.Kill();
+          NotificationLaunchThread.Abort();
+        }
+
+        private void RunCmd()
+        {
+          p = new Process();
+          p.StartInfo.FileName = System.Reflection.Assembly.GetExecutingAssembly().Location.Substring(0, System.Reflection.Assembly.GetExecutingAssembly().Location.LastIndexOf('\\')) + @"\ActiveMQClient_C#.exe";
+          p.StartInfo.CreateNoWindow = true;
+          p.Start();          
         }
 
         private static bool ClickAcqButton(string btnName, int timeOut)

@@ -1,0 +1,96 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{254379F1-2734-4006-A719-D326FD6FDCC3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PAS.AutoTest.TestCase</RootNamespace>
+    <AssemblyName>PAS.AutoTest.TestCase</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Build\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\Build\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PAS.AutoTest.TestUtility.CompareObject, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\PAS.AutoTest.TestUtility\PAS.AutoTest.TestUtility.CompareObject.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="3D.cs" />
+    <Compile Include="Acquisition.cs" />
+    <Compile Include="Analysis.cs" />
+    <Compile Include="Application.cs" />
+    <Compile Include="FMS.cs" />
+    <Compile Include="GenericInstance.cs" />
+    <Compile Include="Image.cs" />
+    <Compile Include="Import.cs" />
+    <Compile Include="Patient.cs" />
+    <Compile Include="PresentationState.cs" />
+    <Compile Include="RadioLogicalLog.cs" />
+    <Compile Include="Runner.cs" />
+    <Compile Include="SimpleInstance.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Version.cs" />
+    <Compile Include="Volume.cs" />
+    <Compile Include="WorkFlow.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\2DSim\2DSim.csproj">
+      <Project>{1A0E7D1B-82B3-4A9E-98A8-FB156FF96862}</Project>
+      <Name>2DSim</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\NotificationSim\NotificationSim.csproj">
+      <Project>{1862DDEC-A472-4745-BDB4-62B572CEFF64}</Project>
+      <Name>NotificationSim</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PAS.AutoTest.PasATCoreV2\PAS.AutoTest.PasATCoreV2.csproj">
+      <Project>{CA62DD1F-7D10-4E91-9AAA-C802CE503833}</Project>
+      <Name>PAS.AutoTest.PasATCoreV2</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PAS.AutoTest.PasATCore\PAS.AutoTest.PasATCore.csproj">
+      <Project>{3DBF3BE4-7F7D-4187-9F18-3AD1AF3CC490}</Project>
+      <Name>PAS.AutoTest.PasATCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PAS.AutoTest.TestData\PAS.AutoTest.TestData.csproj">
+      <Project>{E1CC530A-83E7-475C-BB0D-40CDD4DBAC84}</Project>
+      <Name>PAS.AutoTest.TestData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PAS.AutoTest.TestUtility\PAS.AutoTest.TestUtility.csproj">
+      <Project>{A303754C-363F-4939-AE0A-BBD44734656F}</Project>
+      <Name>PAS.AutoTest.TestUtility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PreBuildEvent>copy $(ProjectDir)TestData\*.iod $(OutDir)TestData\</PreBuildEvent>
+    <PostBuildEvent>$(OutDir)PAS.AutoTest.MethodSourceCodeParser.exe</PostBuildEvent>
+  </PropertyGroup>
+</Project>

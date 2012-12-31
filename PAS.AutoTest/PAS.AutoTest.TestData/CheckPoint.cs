@@ -27,7 +27,10 @@ namespace PAS.AutoTest.TestData
         /// <summary>
         /// empty constructor
         /// </summary>
-        public CheckPoint() { }
+        public CheckPoint() 
+        {
+            this.mResult = TestResult.Incomplete;
+        }
 
         /// <summary>
         /// initialize with key and des.
@@ -38,6 +41,7 @@ namespace PAS.AutoTest.TestData
         {
             this.mKey = key;
             this.mDes = description;
+            this.mResult = TestResult.Incomplete;
         }
 
         /// <summary>

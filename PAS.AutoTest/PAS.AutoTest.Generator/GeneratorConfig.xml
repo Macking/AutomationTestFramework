@@ -1,0 +1,12 @@
+﻿<Config>
+  <Configuration>
+    <ClassGenerator Name="ToolFullPath">C:\Program Files\Microsoft Visual Studio 8\SDK\v2.0\Bin\xsd.exe</ClassGenerator>
+    <ClassGenerator Name="XSDFile">XSDFiles\PatientListObjectsRequest.xsd</ClassGenerator>
+    <ClassGenerator Name="XSDFile">XSDFiles\PatientListObjectsResponse.xsd</ClassGenerator>
+    <ClassGenerator Name="XSDFile">XSDFiles\ApplicationOpenObjectsRequest.xsd</ClassGenerator>
+    <ClassGenerator Name="XSDFile">XSDFiles\ApplicationOpenObjectsResponse.xsd</ClassGenerator>
+    <ClassGenerator Name="XSDFile">XSDFiles\CSDMAll.xsd</ClassGenerator>
+    <LibGenerator Name="ToolFullPath">C:\WINDOWS\Microsoft.NET\Framework\v2.0.50727\MSBuild.exe</LibGenerator>
+    <LibGenerator Name="project">..\..\PAS.AutoTest\PAS.AutoTest.PasATCoreV2\PAS.AutoTest.PasATCoreV2.csproj</LibGenerator>
+  </Configuration>
+</Config>

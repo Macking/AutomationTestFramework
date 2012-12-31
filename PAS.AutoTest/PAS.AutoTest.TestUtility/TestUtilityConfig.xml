@@ -1,0 +1,9 @@
+﻿<TestConfigFile>
+  <QCConnect>
+    <ServerAddr>http://shgwp1016:8080/qcbin/</ServerAddr>
+    <Domain>DENTAL</Domain>
+    <Project>PAS</Project>
+    <LoginName>19002433</LoginName>
+    <Password></Password>
+  </QCConnect>
+</TestConfigFile>

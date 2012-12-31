@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PAS.AutoTest.PasATCoreV2", "PAS.AutoTest.PasATCoreV2.csproj", "{CA62DD1F-7D10-4E91-9AAA-C802CE503833}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PAS.AutoTest.TestUtility", "..\PAS.AutoTest.TestUtility\PAS.AutoTest.TestUtility.csproj", "{A303754C-363F-4939-AE0A-BBD44734656F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CA62DD1F-7D10-4E91-9AAA-C802CE503833}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA62DD1F-7D10-4E91-9AAA-C802CE503833}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA62DD1F-7D10-4E91-9AAA-C802CE503833}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA62DD1F-7D10-4E91-9AAA-C802CE503833}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A303754C-363F-4939-AE0A-BBD44734656F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A303754C-363F-4939-AE0A-BBD44734656F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A303754C-363F-4939-AE0A-BBD44734656F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A303754C-363F-4939-AE0A-BBD44734656F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

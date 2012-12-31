@@ -19,6 +19,20 @@ namespace TwoDSim
   {
     static void Main(string[] args)
     {
+      //if (args.Length < 1)
+      //{
+      //  Console.WriteLine("No argument passed!");
+      //  Debug.Print("Cosmetic Simulator: No argument passed!");
+      //}
+      //else
+      //{
+      //  foreach (string ar in args)
+      //  {
+      //    Console.WriteLine("Argument:{0}", ar);
+      //    Debug.Print("Cosmetic Simulator:Argument Content {0}", ar);
+      //  }
+      //}
+      Debug.Print("2D Simulator: Start!");
       int port = 10000;
       string sRet = "";
       //simulator si = new simulator(port, "2DViewer");
@@ -42,6 +56,7 @@ namespace TwoDSim
       while (true)
       {
       //Start 2DView
+        //si.StartSimulater("0,Logicon");
         si.StartSimulater("0,2DViewer");
       //...
       sRet = si.StopSimulator(120000);
@@ -233,7 +248,7 @@ namespace TwoDSim
 
         tcpListener.Start();
       
-        byte[] readStr = new byte[1024];
+        //byte[] readStr = new byte[1024];
         //while (true)
         //{
         

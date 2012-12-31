@@ -1,0 +1,73 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CA62DD1F-7D10-4E91-9AAA-C802CE503833}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PAS.AutoTest.PasATCoreV2</RootNamespace>
+    <AssemblyName>PAS.AutoTest.PasATCoreV2</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Build\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\Build\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PAS.AutoTest.TestUtility.CompareObject, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\PAS.AutoTest.TestUtility\PAS.AutoTest.TestUtility.CompareObject.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="GeneratedClassFiles\CSDMAll.cs" />
+    <Compile Include="ApplicationService.cs" />
+    <None Include="GeneratedClassFiles\CSDMAll.cs" />
+    <Compile Include="GenericInstanceService.cs" />
+    <Compile Include="ImageService.cs" />
+    <Compile Include="ServiceBase.cs" />
+    <Compile Include="PatientService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SimpleInstanceService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PAS.AutoTest.TestData\PAS.AutoTest.TestData.csproj">
+      <Project>{E1CC530A-83E7-475C-BB0D-40CDD4DBAC84}</Project>
+      <Name>PAS.AutoTest.TestData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PAS.AutoTest.TestUtility\PAS.AutoTest.TestUtility.csproj">
+      <Project>{A303754C-363F-4939-AE0A-BBD44734656F}</Project>
+      <Name>PAS.AutoTest.TestUtility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <PropertyGroup>
+    <PreBuildEvent>copy ..\..\..\..\csdm\src\CommonLib\src\main\resources\*.xsd $(OutDir)XSDFiles
+$(ProjectDir)tool\xsd.exe /c ..\..\..\..\csdm\src\CommonLib\src\main\resources\CSDMAll.xsd /out:$(ProjectDir)GeneratedClassFiles /namespace:PAS.AutoTest.PasATCoreV2</PreBuildEvent>
+  </PropertyGroup>
+</Project>

@@ -1,9 +1,11 @@
 using System;
 using System.Text;
 using System.Collections;
+using System.Reflection;
 using System.Diagnostics;
 using System.Collections.Generic;
 using TDAPIOLELib;
+using log4net;
 
 namespace AutotestIntsys
 {
@@ -14,6 +16,7 @@ namespace AutotestIntsys
     private bool createTFSucess;
     private bool createTSSucess;
     private string tsFolderName;
+    private ILog AutoLog = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
     //Constructor should provide the QC Connection Handle and TestConfigFile as parameters
     public TestManage(TDConnectionClass td, TestConfigFile tf)
@@ -26,7 +29,7 @@ namespace AutotestIntsys
     }
 
     //Given the test target machine name for calling RunTestSets
-    public bool RunTestSets(string testMachine)
+    public bool RunTestSets(string testMachine,string configPath)
     {
       try
       {
@@ -39,18 +42,29 @@ namespace AutotestIntsys
         {
           // need give the testmachine name and notice the whether use QTP,
           // These value from command input
-
+          
           if (testMachine != null && testMachine != "")
-            RunCurrentSet(ts, testMachine, configFile.RunParameter.UsingQTP);
+          {
+            AutoLog.Info("[bool RunTestSets]Begin to run test set: " + ts.Name);
+            //Console.Out.WriteLine("==========[bool RunTestSets]Begin to run test set: " + ts.Name);
+            RunCurrentSet(ts, testMachine, configFile.RunParameter.UsingQTP, configPath);
+            AutoLog.Info("[bool RunTestSets]End to run test set: " + ts.Name);
+            //Console.Out.WriteLine("==========[bool RunTestSets]End run test set: " + ts.Name);
+          }
           else
-            RunCurrentSet(ts, configFile.RunParameter.TestMachine, configFile.RunParameter.UsingQTP);
+          {
+            RunCurrentSet(ts, configFile.RunParameter.TestMachine, configFile.RunParameter.UsingQTP,configPath);
+          }
         }
+        
         return true;
       }
       catch (Exception e)
       {
-        Debug.Print("AutoIntSys:" + e);
-        Debug.Print("AutoIntSys:Run Test Sets Error!");
+        AutoLog.Info("AutoIntSys: Run test sets exception" + e.Message);
+        //Console.Out.WriteLine("AutoIntSys: Run test sets exception" + e.Message);
+        //Debug.Print("AutoIntSys:" + e);
+        //Debug.Print("AutoIntSys:Run Test Sets Error!");
         return false;
       }
     }
@@ -66,24 +80,31 @@ namespace AutotestIntsys
         List<string> TestSetNames = GetAllTestSetNames(configFile.CaseFilter.TestSetName);
         if (TestSetNames != null)
         {
-          TestSetFolder tsFold = CreateTestSetFolder(FolderName);
+          TestSetFolder tsFold = CreateTestSetFolder(FolderName);          
           if (tsFold != null && createTFSucess)
           {
             TestSetFolder CreateTS = CreateTestSetNames(TestSetNames, tsFold);
           }
           if (createTSSucess)
+          {
+            AutoLog.Info("[bool CreateTestSets]AutoIntSys: Create Test sets success");
+            //Console.Out.WriteLine("==========[bool CreateTestSets]AutoIntSys: Create Test sets success");
             return true;
+          }
         }
         return false;
       }
       catch (Exception e)
       {
-        Debug.Print("AutoIntSys:" + e);
-        Debug.Print("AutoIntSys:Create Test Sets Error!");
+        AutoLog.Info("AutoIntSys: Exception with " + e.Message);
+        AutoLog.Info("AutoIntSys: Create Test Sets Error!");
+        //Debug.Print("AutoIntSys:" + e);
+        //Debug.Print("AutoIntSys:Create Test Sets Error!");
+        //Console.Out.WriteLine("Create Test Sets Error!");
         return false;
       }
     }
-
+    
     /*
       //try
       //{
@@ -169,8 +190,10 @@ namespace AutotestIntsys
       }
       catch (Exception e)
       {
-        Debug.Print("AutoIntSys:" + e);
-        Debug.Print("AutoIntSys:Fail to get Specified Field Value from TEST Table!");
+        AutoLog.Info("AutoIntSys: Exception with " + e.Message);
+        AutoLog.Info("AutoIntSys: Fail to get Specified Field Value from TEST Table!");
+        //Debug.Print("AutoIntSys:" + e);
+        //Debug.Print("AutoIntSys:Fail to get Specified Field Value from TEST Table!");
         return null;
       }
     }
@@ -204,10 +227,11 @@ namespace AutotestIntsys
 
         if (CheckFolderIsExist(TestSetFolderPath, FolderName))
         {
-          Debug.Print("AutoIntSys: Test folder has already in QC!");          
+          AutoLog.Info("AutoIntSys: Test folder has already in QC!");
+          //Debug.Print("AutoIntSys: Test folder has already in QC!");
           SysTreeNode getTestSetFolder = TestSetFolderPath.FindChildNode(FolderName) as SysTreeNode;
           TestSetFolder TSExistFolder = TestSetTreeMana.get_NodeById(getTestSetFolder.NodeID) as TestSetFolder;
-
+          
           createTFSucess = false;
           return TSExistFolder;
         }
@@ -222,8 +246,10 @@ namespace AutotestIntsys
       }
       catch (Exception e)
       {
-        Debug.Print("AutoIntSys:Create Test Sets Error!"); 
-        Debug.Print("AutoIntSys:" + e.Message);
+        AutoLog.Info("AutoIntSys: Exception with " + e.Message);
+        AutoLog.Info("AutoIntSys: Create Test Sets Error!");
+        //Debug.Print("AutoIntSys:Create Test Sets Error!");
+        //Debug.Print("AutoIntSys:" + e.Message);
         return null;
       }
     }
@@ -279,8 +305,8 @@ namespace AutotestIntsys
 
         string sqlCommand = GenerateSQLText(columnName);
         com.CommandText = sqlCommand;
-
-        IRecordset recList = com.Execute() as IRecordset;
+        
+        IRecordset recList = com.Execute() as IRecordset;        
 
         recList.First();
         for (int num = 0; num < recList.RecordCount; num++)
@@ -295,8 +321,10 @@ namespace AutotestIntsys
       }
       catch (Exception e)
       {
-        Debug.Print("AutoIntSys:Fail to get Specified Field Value from TEST Table!");
-        Debug.Print("AutoIntSys:" + e);
+        AutoLog.Info("AutoIntSys: Exception with " + e.Message);
+        AutoLog.Info("AutoIntSys: Fail to get Specified Field Value from TEST Table!");
+        //Debug.Print("AutoIntSys:Fail to get Specified Field Value from TEST Table!");
+        //Debug.Print("AutoIntSys:" + e);
         return null;
       }
       #endregion
@@ -319,16 +347,18 @@ namespace AutotestIntsys
           {
             if (t.Test_Custom == TSName)
               TSTestFact.AddItem(t.Test_ID);
-          }
+          }        
         }
-
+        
         createTSSucess = true;
         return TSFolder;
       }
       catch (Exception e)
       {
-        Debug.Print("AutoIntSys:Create Test Sets Error!");
-        Debug.Print("AutoIntSys:" + e.Message);
+        AutoLog.Info("AutoIntSys: Exception with " + e.Message);
+        AutoLog.Info("AutoIntSys: Create Test Sets Error!");
+        //Debug.Print("AutoIntSys:Create Test Sets Error!");
+        //Debug.Print("AutoIntSys:" + e.Message);
         return null;
       }
       #endregion
@@ -350,44 +380,46 @@ namespace AutotestIntsys
       ////Add test set name
     */
 
-    private void RunCurrentSet(TestSet RunSet, string destMachine, bool isQTPRun)
+    private void RunCurrentSet(TestSet RunSet, string destMachine, bool isQTPRun, string configpath)
     {
+      Console.Out.WriteLine("Enter the RunCurrentSet");
       if (isQTPRun)
       {
         #region Using QTP
+        Console.Out.WriteLine("==========[void RunCurrentSet]Now something exception happen for QTP scheduler");
+        //Console.Out.WriteLine("AutoIntSys: Begin to load QTP");
+        //TSTestFactory TSTestFact = RunSet.TSTestFactory as TSTestFactory;
+        //List runList = new List();
+        //runList = TSTestFact.NewList("") as List;
+        //if (runList.Count < 1)
+        //  return;
+        //TSScheduler Scheduler = RunSet.StartExecution("localhost") as TSScheduler;
+        //if (destMachine == "localhost")
+        //  Scheduler.RunAllLocally = true;
+        //else
+        //  Scheduler.TdHostName = destMachine;
 
-        TSTestFactory TSTestFact = RunSet.TSTestFactory as TSTestFactory;
-        List runList = new List();
-        runList = TSTestFact.NewList("") as List;
-        if (runList.Count < 1)
-          return;
-        TSScheduler Scheduler = RunSet.StartExecution("localhost") as TSScheduler;
-        if (destMachine == "localhost")
-          Scheduler.RunAllLocally = true;
-        else
-          Scheduler.TdHostName = destMachine;
+        //try
+        //{
+        //  Debug.Print("AutoIntSys: Run Start at: " + TestUtility.GetCurrentTime());
+        //  Scheduler.Run(runList);
+        //}
+        //catch (Exception e)
+        //{
+        //  Debug.Print("AutoIntSys: RUNNING Test Case Error!");
+        //  Debug.Print("AutoIntSys: " + e.Message);
+        //}
 
-        try
-        {
-          Debug.Print("AutoIntSys: Run Start at: " + TestUtility.GetCurrentTime());
-          Scheduler.Run(runList);
-        }
-        catch (Exception e)
-        {
-          Debug.Print("AutoIntSys: RUNNING Test Case Error!");
-          Debug.Print("AutoIntSys: " + e.Message);
-        }
+        //ExecutionStatus execStatus = Scheduler.ExecutionStatus as ExecutionStatus;
 
-        ExecutionStatus execStatus = Scheduler.ExecutionStatus as ExecutionStatus;
-
-        bool isRunFinished = false;
-        while (!isRunFinished)
-        {
-          execStatus.RefreshExecStatusInfo(runList, true);
-          isRunFinished = execStatus.Finished;
-          System.Threading.Thread.Sleep(5000);
-        }
-        Debug.Print("AutoIntSys: Run Finish at: " + TestUtility.GetCurrentTime());
+        //bool isRunFinished = false;
+        //while (!isRunFinished)
+        //{
+        //  execStatus.RefreshExecStatusInfo(runList, true);
+        //  isRunFinished = execStatus.Finished;
+        //  System.Threading.Thread.Sleep(5000);
+        //}
+        //Debug.Print("AutoIntSys: Run Finish at: " + TestUtility.GetCurrentTime());
         //Console.WriteLine("Run Finish at: {0}", TestUtility.GetCurrentTime());
         #endregion
       }
@@ -395,13 +427,18 @@ namespace AutotestIntsys
       {
         CustomerProcess.CustomerProcess cp = new CustomerProcess.CustomerProcess();
         if (cp.LoadRunInstance(".") > 0)
-        {
-          Debug.Print("AutoIntSys: Run Start at: " + TestUtility.GetCurrentTime());
+        { 
+          AutoLog.Info("AutoIntSys: [void RunCurrentSet]Current Test set start run!");
+          //Debug.Print("AutoIntSys: Run CP Start at: " + TestUtility.GetCurrentTime());
+          //Console.Out.WriteLine("==========[void RunCurrentSet]Current Test set start: " + TestUtility.GetCurrentTime());
           AutoTestInterface.IRunTest runScheduler = cp.GetRunName(configFile.RunParameter.CustomerTestPro);
-          runScheduler.Run(tdConn, RunSet, "TestConfig.xml");
+          runScheduler.Run(tdConn, RunSet, configpath);
           System.Threading.Thread.Sleep(5000);
           runScheduler.RunFinished();
-          Debug.Print("AutoIntSys: Run Finish at: " + TestUtility.GetCurrentTime());
+
+          AutoLog.Info("AutoIntSys: [void RunCurrentSet]Current Test set end run!");
+          //Debug.Print("AutoIntSys: Run CP Finish at: " + TestUtility.GetCurrentTime());
+          //Console.Out.WriteLine("==========[void RunCurrentSet]Current Test set end: " + TestUtility.GetCurrentTime());
         }
 
         #region Unused
@@ -418,9 +455,9 @@ namespace AutotestIntsys
           RunFactory runFact = instance.RunFactory as RunFactory;
           DateTime now = TestUtility.GetCurrentTime();
           Run instanceRun = runFact.AddItem("Run_" + now.ToShortDateString() +
-                                          "_" + now.ToShortTimeString()) as Run;
+                                          "_" + now.ToShortTimeString()) as Run;         
 
-          QCOperation.QCInformation info = new QCOperation.QCInformation();
+          QCOperation.QCInformation info = new QCOperation.QCInformation();          
           // string runID = instanceRun.ID as string;
           //Initial the start status
           info.SetTestRunStatus(tdConn, instanceRun.ID.ToString(), "Not Completed");
@@ -443,7 +480,7 @@ namespace AutotestIntsys
           string instanceID = instance.ID as string;
           string scriptFilename = null;
           string dataFilename = null;
-          for (int i = 0; i < attachments.Count; i++)
+          for(int i = 0; i < attachments.Count; i++)
           {
             ArrayList downList = attachments[i] as ArrayList;
             if (downList.Count > 0)
@@ -463,29 +500,29 @@ namespace AutotestIntsys
             }
           }
           if (scriptFilename != null)
-          {
-            PAS.AutoTest.ScriptRunner.ScriptRunner sr = new PAS.AutoTest.ScriptRunner.ScriptRunner();
+                {
+                  PAS.AutoTest.ScriptRunner.ScriptRunner sr = new PAS.AutoTest.ScriptRunner.ScriptRunner();
             PAS.AutoTest.ScriptRunner.ExecuteResult er;
             if (dataFilename!=null)
             {  er = sr.Run(scriptFilename, dataFilename, 600); }
             else
             {  er = sr.Run(scriptFilename, string.Empty, 600); }
-            switch (er.Output.Result)
-            {
-              case PAS.AutoTest.TestData.TestResult.Pass:
-                info.SetTestRunStatus(tdConn, instanceRun.ID.ToString(), "Passed");
-                break;
-              case PAS.AutoTest.TestData.TestResult.Fail:
-                info.SetTestRunStatus(tdConn, instanceRun.ID.ToString(), "Failed");
-                break;
-              default:
-                info.SetTestRunStatus(tdConn, instanceRun.ID.ToString(), "Not Completed");
-                break;
-            }
+                  switch (er.Output.Result)
+                  {
+                    case PAS.AutoTest.TestData.TestResult.Pass:
+                      info.SetTestRunStatus(tdConn, instanceRun.ID.ToString(), "Passed");
+                      break;
+                    case PAS.AutoTest.TestData.TestResult.Fail:
+                      info.SetTestRunStatus(tdConn, instanceRun.ID.ToString(), "Failed");
+                      break;
+                    default:
+                      info.SetTestRunStatus(tdConn, instanceRun.ID.ToString(), "Not Completed");
+                      break;
+                  }
 
-            info.SetTestInstanceSummary(tdConn, instanceID, configFile.RunParameter.NumOfPassed, er.Output.Summary.Passed.ToString());
-            info.SetTestInstanceSummary(tdConn, instanceID, configFile.RunParameter.NumOfTotal, er.Output.Summary.TotalRun.ToString());
-          }
+                  info.SetTestInstanceSummary(tdConn, instanceID, configFile.RunParameter.NumOfPassed, er.Output.Summary.Passed.ToString());
+                  info.SetTestInstanceSummary(tdConn, instanceID, configFile.RunParameter.NumOfTotal, er.Output.Summary.TotalRun.ToString());
+                }
         }
          ****/
         #endregion

@@ -10,25 +10,26 @@ using Microsoft.CSharp;
 using System.CodeDom;
 using System.CodeDom.Compiler;
 using System.Threading;
+using log4net;
 
-using PAS.AutoTest.PasATCore;
 using PAS.AutoTest.TestData;
 
 namespace PAS.AutoTest.ScriptRunner
 {
     public class ScriptRunner
     {
-        private string mLastOutput = @"LastOutput.xml";
+        //private string mLastOutput = @"LastOutput.xml";
         private object syncObject = new object();
         private Thread mScriptRunner;
-        private Thread mSynchronize ;
+        private Thread mSynchronize;
         private OutputData mOutput = new OutputData();
         private bool mIsRunComplete = false;
         private bool mIsTimeout = false;
 
-    //add by macking 2011/08/19 for get the runner return from scripts
-    private string mLastRunnerReturn;
+        //add by macking 2011/08/19 for get the runner return from scripts
+        private string mLastRunnerReturn;
 
+        ILog AutoLog = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
         /// run the script
@@ -44,6 +45,8 @@ namespace PAS.AutoTest.ScriptRunner
 
             try
             {
+                AutoLog.Info("****[ExecuteResult Run]AutoTest: Enter Run method!****");
+                //Console.Out.WriteLine("**************[ExecuteResult Run]AutoTest: Enter Run method!**************");
                 StreamReader sr = new StreamReader(scriptFilePath);
                 this.ExecuteScript(sr.ReadToEnd(), inputDataFilePath, timeOut);
 
@@ -53,11 +56,17 @@ namespace PAS.AutoTest.ScriptRunner
                 if (!mIsTimeout)
                 {
                     if (LastOutput.Summary.Failed > 0)                //failed checkpoints exists
+                    {
                         er.Result = TestResult.Fail;
+                    }
                     else if (LastOutput.Summary.Passed == 0)    // no pass no failed
+                    {
                         er.Result = TestResult.Done;
+                    }
                     else                                                              // all other condition
+                    {
                         er.Result = TestResult.Pass;
+                    }
                 }
                 else
                 {
@@ -124,9 +133,9 @@ namespace PAS.AutoTest.ScriptRunner
         /// </summary>
         public void ExecuteScript(string script, string inputDataPath, int timout)
         {
+            AutoLog.Info("****[Void ExecuteScript]AutoTest: Begin to compile the script!****");
+            //Console.Out.WriteLine("**************[Void ExecuteScript]AutoTest: Begin to compile the script!**************");
             CSharpCodeProvider objCSharpCodePrivoder = new CSharpCodeProvider();
-
-            ICodeCompiler objICodeCompiler = objCSharpCodePrivoder.CreateCompiler();
 
             CompilerParameters objCompilerParameters = new CompilerParameters();
             objCompilerParameters.ReferencedAssemblies.Add("System.dll");
@@ -134,21 +143,24 @@ namespace PAS.AutoTest.ScriptRunner
             objCompilerParameters.ReferencedAssemblies.Add("System.Windows.Forms.dll");
             objCompilerParameters.ReferencedAssemblies.Add("System.Xml.dll");
             objCompilerParameters.ReferencedAssemblies.Add("PAS.AutoTest.PasATCore.dll");
+            objCompilerParameters.ReferencedAssemblies.Add("PAS.AutoTest.PasATCoreV2.dll");
             objCompilerParameters.ReferencedAssemblies.Add("PAS.AutoTest.ScriptRunner.dll");
             objCompilerParameters.ReferencedAssemblies.Add("PAS.AutoTest.TestData.dll");
-      
+            objCompilerParameters.ReferencedAssemblies.Add("PAS.AutoTest.TestUtility.dll");
+            objCompilerParameters.ReferencedAssemblies.Add("PAS.AutoTest.TestUtility.CompareObject.dll");
+
             objCompilerParameters.ReferencedAssemblies.Add("KDIS7ATCore.dll");
             objCompilerParameters.ReferencedAssemblies.Add("2DSim.dll");
-      objCompilerParameters.ReferencedAssemblies.Add("NotificationSim.dll");
+            objCompilerParameters.ReferencedAssemblies.Add("NotificationSim.dll");
 
             objCompilerParameters.GenerateExecutable = false;
             objCompilerParameters.GenerateInMemory = true;
 
-            CompilerResults cr = objICodeCompiler.CompileAssemblyFromSource(objCompilerParameters, this.GenerateScript(script, inputDataPath));
+            CompilerResults cr = objCSharpCodePrivoder.CompileAssemblyFromSource(objCompilerParameters, this.GenerateScript(script, inputDataPath));
 
             if (cr.Errors.HasErrors)
             {
-                MessageBox.Show("Compile Error: ");
+                MessageBox.Show(inputDataPath + ":" + "Compile Error: ");
                 foreach (CompilerError err in cr.Errors)
                 {
                     MessageBox.Show(err.ErrorText);
@@ -156,29 +168,39 @@ namespace PAS.AutoTest.ScriptRunner
             }
             else
             {
-                Assembly objAssembly = cr.CompiledAssembly;
-                object  objRunner = objAssembly.CreateInstance("CaseRunner.Runner");
+                AutoLog.Info("****[Void ExecuteScript]AutoTest: Compile pass and invoke the RUN****");
+                try
+                {
+                    Assembly objAssembly = cr.CompiledAssembly;
+                    object objRunner = objAssembly.CreateInstance("CaseRunner.Runner");
+                    AutoLog.Info("****[Void ExecuteScript]AutoTest: Create runner instance end****");
+                    //mScriptRunner = new Thread(RunScriptSync);
+                    //mSynchronize = new Thread(TimerStart);
 
-                //mScriptRunner = new Thread(RunScriptSync);
-                //mSynchronize = new Thread(TimerStart);
+                    //this.mScriptRunner.Start(objRunner);
+                    //this.mSynchronize.Start(timout);
 
-                //this.mScriptRunner.Start(objRunner);
-                //this.mSynchronize.Start(timout);
+                    MethodInfo objMI = objRunner.GetType().GetMethod("Run");
+                    objMI.Invoke(objRunner, null);
+                    AutoLog.Info("****[Void ExecuteScript]AutoTest: invoke the RUN end****");
 
-                MethodInfo objMI = objRunner.GetType().GetMethod("Run");
-                objMI.Invoke(objRunner, null);
-
-        //object runStatus = objRunner.GetType().GetMethod("getRunStatus").Invoke(objRunner, null);
-        //if (runStatus)
-        //{
-        mLastRunnerReturn = (string)objRunner.GetType().GetMethod("getRunReturn").Invoke(objRunner, null);
-        mOutput.ConvertFromString(mLastRunnerReturn);
-        //}
-        //else
-        //{
-        //  mLastRunnerReturn = string.Empty;
-        //}
-        //Console.Out.WriteLine("OK");
+                    //object runStatus = objRunner.GetType().GetMethod("getRunStatus").Invoke(objRunner, null);
+                    //if (runStatus)
+                    //{
+                    mLastRunnerReturn = (string)objRunner.GetType().GetMethod("getRunReturn").Invoke(objRunner, null);
+                    mOutput.ConvertFromString(mLastRunnerReturn);
+                    AutoLog.Info("****[Void ExecuteScript]AutoTest: result " + mLastRunnerReturn + " ****");
+                    //}
+                    //else
+                    //{
+                    //  mLastRunnerReturn = string.Empty;
+                    //}
+                }
+                catch (System.Exception ex)
+                {
+                    AutoLog.Info("****[Void ExecuteScript]Invoke RUN exception: " + ex.Message);
+                    throw ex;
+                }
             }
         }
 
@@ -200,10 +222,10 @@ namespace PAS.AutoTest.ScriptRunner
         {
             get
             {
-        //modify by macking 2011/08/19 for get the runner return from scripts
-        //return new OutputData(this.mLastOutput);
-        //return new OutputData(mLastRunnerReturn);
-        return mOutput;
+                //modify by macking 2011/08/19 for get the runner return from scripts
+                //return new OutputData(this.mLastOutput);
+                //return new OutputData(mLastRunnerReturn);
+                return mOutput;
             }
         }
     }

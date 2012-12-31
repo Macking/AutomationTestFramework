@@ -147,6 +147,21 @@ namespace AutotestIntsys
         get { return this.NumOfTotalField; }
         set { this.NumOfTotalField = value; }
       }
+
+      private bool RunRemoteField;
+      public bool RunRemote
+      {
+        get { return this.RunRemoteField; }
+        set { this.RunRemoteField = value; }
+      }
+
+      private string RemotePathField;
+      [XmlElementAttribute(IsNullable = false)]
+      public string RemotePath
+      {
+        get { return this.RemotePathField; }
+        set { this.RemotePathField = value; }
+      }
     }
 
     //define the filter's name and value

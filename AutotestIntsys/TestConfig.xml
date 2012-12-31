@@ -2,15 +2,15 @@
 	<QCConnect>
 		<ServerAddr>http://shgwp1016:8080/qcbin/</ServerAddr>
 		<Domain>DENTAL</Domain>
-		<Project>PAS</Project>
+    <Project>PAS</Project>
 		<LoginName>19002433</LoginName>
 		<Password></Password>
 	</QCConnect>
 	<CaseFilter>
-		<TestSetName>TS_USER_08</TestSetName>
+    <TestSetName>TS_USER_08</TestSetName>
 		<AutorunFilter>
-			<FieldName>TS_ATTACHMENT</FieldName>
-			<FieldValue>Y</FieldValue>
+      <FieldName>TS_ATTACHMENT</FieldName>
+      <FieldValue>Y</FieldValue>
 		</AutorunFilter>
 		<AutorunFilter>
 			<FieldName>TS_USER_09</FieldName>
@@ -21,10 +21,10 @@
 		<TestMachine>localhost</TestMachine>
 		<UsingQTP>false</UsingQTP>
 		<CustomerTestPro>CustomerTestPro.PASTestProcedure</CustomerTestPro>
-		<DownloadFile>*.IOD</DownloadFile>
-		<DownloadFile>*.COD</DownloadFile>
-		<NumOfPassed>TC_USER_02</NumOfPassed>
-		<NumOfTotal>TC_USER_03</NumOfTotal>
+    <DownloadFile>*.IOD</DownloadFile>
+    <DownloadFile>*.COD</DownloadFile>
+    <NumOfPassed>TC_USER_02</NumOfPassed>
+    <NumOfTotal>TC_USER_03</NumOfTotal>
 	</RunParameter>
 	<TestLog>
 	</TestLog>

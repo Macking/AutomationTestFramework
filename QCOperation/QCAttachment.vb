@@ -216,7 +216,14 @@ Public Class QCAttachment
         GetAttachmentFromTestName = Result
     End Function
 
-    'Attach an attachment file to run, if the filename already exist, the upload will over the old one
+    ''' <summary>
+    ''' Attach an attachment file to run, if the filename already exist, the upload will over the old one
+    ''' </summary>
+    ''' <param name="tdConn">The td conn.</param>
+    ''' <param name="Id">The id.</param>
+    ''' <param name="FileName">Name of the file.</param>
+    ''' <param name="FilePath">The file path.</param>
+    ''' <returns></returns>
     Private Function AttachFileToRun(ByVal tdConn As TDConnectionClass, _
                                          ByVal Id As String, _
                                          ByVal FileName As String, _
@@ -267,7 +274,15 @@ Public Class QCAttachment
         AttachFileToRun = Result
     End Function
 
-    'Attach an attachment file to test, if the filename already exist, the upload will over the old one
+
+    ''' <summary>
+    ''' Attach an attachment file to test, if the filename already exist, the upload will over the old one
+    ''' </summary>
+    ''' <param name="tdConn">The td conn.</param>
+    ''' <param name="Id">The id.</param>
+    ''' <param name="FileName">Name of the file.</param>
+    ''' <param name="FilePath">The file path.</param>
+    ''' <returns></returns>
     Private Function AttachFileToTest(ByVal tdConn As TDConnectionClass, _
                                          ByVal Id As String, _
                                          ByVal FileName As String, _
@@ -318,6 +333,40 @@ Public Class QCAttachment
     End Function
 
     ''' <summary>
+    ''' Removes the attachment from test.
+    ''' </summary>
+    ''' <param name="tdConn">The td conn.</param>
+    ''' <param name="Id">The id.</param>
+    ''' <returns></returns>
+    Private Function RemoveAttachmentFromTest(ByVal tdConn As TDConnectionClass, _
+                                         ByVal Id As String)
+        Dim Result As Boolean
+        Dim test As TDAPIOLELib.Test
+        Dim Attachment As AttachmentFactory
+        Dim attachmentList As List
+        Dim att As Attachment
+
+        Result = False
+        Try
+            test = tdConn.TestFactory().item(Id)
+            Attachment = test.Attachments
+
+            attachmentList = Attachment.NewList("SELECT * FROM CROS_REF")
+
+            For Each att In attachmentList 'Remove the attachment one by one
+                Attachment.RemoveItem(att.ID)
+            Next
+
+            Result = True
+
+        Catch
+            Result = False
+        End Try
+
+        RemoveAttachmentFromTest = Result
+    End Function
+
+    ''' <summary>
     ''' Upload attachment to QC
     ''' <para>Only implement the RUN and TEST type</para>
     ''' </summary>
@@ -353,6 +402,30 @@ Public Class QCAttachment
             End Select
         End If
         UploadAttachment = Result
+
+    End Function
+
+    ''' <summary>
+    ''' Removes the attachment from QC, currently only support remove from test case.
+    ''' </summary>
+    ''' <param name="TdConn">The td conn.</param>
+    ''' <param name="Type">The type.</param>
+    ''' <param name="Id">The id.</param>
+    ''' <returns></returns>
+    Public Function RemoveAttachment(ByVal TdConn As TDConnectionClass, _
+                                    ByVal Type As String, _
+                                    ByVal Id As String) As Boolean
+        Dim Result As Boolean
+        Result = False
+
+        Select Case Type.ToUpper()
+            'Case "RUN"
+            'Result = False ' Not supported yet
+            Case "TEST"
+                Result = RemoveAttachmentFromTest(TdConn, Id)
+        End Select
+
+        RemoveAttachment = Result
 
     End Function
 

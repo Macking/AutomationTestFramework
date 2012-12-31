@@ -4,6 +4,7 @@ using System.Text;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Xml;
+using PAS.AutoTest.TestUtility;
 
 namespace PAS.AutoTest.PasATCore
 {
@@ -62,7 +63,7 @@ namespace PAS.AutoTest.PasATCore
 
             get
             {
-                return PAS.AutoTest.PasATCore.GetWSAssembly.GetWsdl(this.MainTypeName);
+                return GetWSAssembly.GetWsdl(this.MainTypeName);
             }
         }
 

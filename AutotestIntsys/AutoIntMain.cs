@@ -4,14 +4,18 @@ using System.Reflection;
 using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
+using log4net;
 
+[assembly: log4net.Config.XmlConfigurator(Watch = true)]
 namespace AutotestIntsys
 {
   class Program
   {
     [STAThread]
     static void Main(string[] args)
-    {
+    {      
+      ILog AutoLog = log4net.LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
+      AutoLog.Info("AutoIntSys:Start!");
       progArgs argClass = new progArgs();
       try
       {
@@ -26,17 +30,23 @@ namespace AutotestIntsys
           {
             case "f":
               if (System.IO.File.Exists(argContent))
+              {
                 argClass.configFile = argContent;                
+                AutoLog.Info("AutoIntSys: Application config file " + argContent);
+              }
               else
               {
                 string appPath = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\" + argContent;
                 //string appPath = System.IO.Directory.GetCurrentDirectory();
                 //appPath += "\\" + argContent;
-                if (System.IO.File.Exists(appPath))
-                { argClass.configFile = appPath; }
-                else
+              if (System.IO.File.Exists(appPath))
                 {
-                  Debug.Print("AutoIntSys: No config file be found!");
+                  argClass.configFile = appPath;
+                  AutoLog.Info("AutoIntSys: Application config file " + appPath);
+                }
+              else
+                {
+                  AutoLog.Info("AutoIntSys: No config file be found!");
                   return;
                 }
               }
@@ -52,8 +62,8 @@ namespace AutotestIntsys
       }
       catch (Exception e)
       {
-        Debug.Print("AutoIntSys:Parse arguments error!");
-        Debug.Print("AutoIntSys:" + e.Message);
+        AutoLog.Info("AutoIntSys: Parse arguments error!");
+        AutoLog.Info("AutoIntSys: " + e.Message);
       }
       if (argClass.configFile == "" || argClass.configFile == null || argClass.testFolder == "" || argClass.testFolder == null)
       {
@@ -63,17 +73,18 @@ namespace AutotestIntsys
         //Not provide the correct parameters for AutoIntSys program, so display some hint and exit
       }
 
-      //string instanceRunName = "Run_" + TestUtility.GetCurrentTime().ToShortDateString() + "_" + TestUtility.GetCurrentTime().ToShortTimeString();
+     //string instanceRunName = "Run_" + TestUtility.GetCurrentTime().ToShortDateString() + "_" + TestUtility.GetCurrentTime().ToShortTimeString();
 
       TestConfigFile tConfig = new TestConfigFile();
       bool success = false;
       //if(argClass.configFile!=null)
-      success = TestUtility.LoadConfigFile(ref tConfig, argClass.configFile);
+        success = TestUtility.LoadConfigFile(ref tConfig, argClass.configFile);
       //else
-      //success = TestUtility.LoadConfigFile(ref tConfig, "TestConfig.xml");
+        //success = TestUtility.LoadConfigFile(ref tConfig, "TestConfig.xml");
 
       if (success)
       {
+        AutoLog.Info("AutoIntSys: Configuration File load success!!");
         QCOTAClass qcOnline = new QCOTAClass(tConfig);
         if (qcOnline.Connect())
         {
@@ -87,15 +98,16 @@ namespace AutotestIntsys
           attachments = (ArrayList)taa.DownloadAttachment(qcOnline.getTDConn(), "Test", "1406", "Query_1406.xml", "C:\\temp");
           //attachments = (ArrayList)taa.DownloadAttachment(qcOnline.getTDConn(), "Test", "1406", "*.XML", "C:\\temp");
           */
-          TestManage tm = new TestManage(qcOnline.getTDConn(), tConfig);
+          TestManage tm = new TestManage(qcOnline.getTDConn(),tConfig);
 
           bool creatTS = false;
           creatTS = tm.CreateTestSets(argClass.testFolder);
+          
           if (creatTS)
-            tm.RunTestSets(argClass.targetMachine);
+            tm.RunTestSets(argClass.targetMachine, argClass.configFile);
 
           qcOnline.DisConnect();
-          if (tConfig.RunParameter.UsingQTP)
+          if(tConfig.RunParameter.UsingQTP)
             TestUtility.KillSpecifyProcess("QTPro");
         }
       }

@@ -22,10 +22,11 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\Build\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Apache.NMS, Version=1.3.0.1959, Culture=neutral, PublicKeyToken=82756feee3957618, processorArchitecture=MSIL">
@@ -43,6 +44,12 @@
   <ItemGroup>
     <Compile Include="ReceiveNotification.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PAS.AutoTest\PAS.AutoTest.TestUtility\PAS.AutoTest.TestUtility.csproj">
+      <Project>{A303754C-363F-4939-AE0A-BBD44734656F}</Project>
+      <Name>PAS.AutoTest.TestUtility</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

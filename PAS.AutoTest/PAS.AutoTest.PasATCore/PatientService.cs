@@ -65,5 +65,46 @@ namespace PAS.AutoTest.PasATCore
             this.lastResult = new XMLResult(this.InvokeMethod("queryPatients", new object[] { filter.GenerateXML() }));
             return this.lastResult;
         }
+
+
+        #region Test Utility
+        /// <summary>
+        /// Utility_s the create patient for specific case.
+        /// </summary>
+        /// <param name="caseID">The case ID.</param>
+        /// <returns>The patien ID</returns>
+        public static string Utility_CreatePatientForSpecificCase(string caseID)
+        {
+            string patientUID = null;
+
+            PatientService ps = new PatientService();
+            XMLParameter pa = new XMLParameter("patient");
+
+            pa.AddParameter("first_name", caseID);
+            pa.AddParameter("last_name", caseID);
+            pa.AddParameter("middle_name", caseID);
+
+            XMLResult result = ps.createPatient(pa);
+
+            if (!result.IsErrorOccured)
+            {
+                patientUID = result.SingleResult;
+            }
+
+            return patientUID;
+        }
+
+        /// <summary>
+        /// Utility_s the delete patient for specific case.
+        /// </summary>
+        /// <param name="patientID">The patient ID.</param>
+        /// <returns>The Web Service Call return</returns>
+        public static XMLResult Utility_DeletePatientForSpecificCase(string patientID)
+        {
+            PatientService ps = new PatientService();
+            XMLResult result = ps.deletePatient(patientID);
+            return result;
+        }
+        #endregion
     }
 }

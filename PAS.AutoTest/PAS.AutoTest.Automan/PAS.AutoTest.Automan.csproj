@@ -1,0 +1,121 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D941E448-8B84-4163-8EF9-40FDE8E1F865}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PAS.AutoTest.Automan</RootNamespace>
+    <AssemblyName>PAS.AutoTest.Automan</AssemblyName>
+    <ApplicationIcon>Mono_project_logo_svg.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Build\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\Build\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Automan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Automan.Designer.cs">
+      <DependentUpon>Automan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Automan.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Automan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="FastCopy\FastCopy.ini">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="FastCopy\FastCopy.log">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Utility.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\PAS.AutoTest\PAS.AutoTest.PasATCoreV2\PAS.AutoTest.PasATCoreV2.csproj">
+      <Project>{CA62DD1F-7D10-4E91-9AAA-C802CE503833}</Project>
+      <Name>PAS.AutoTest.PasATCoreV2</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\PAS.AutoTest\PAS.AutoTest.PasATCore\PAS.AutoTest.PasATCore.csproj">
+      <Project>{3DBF3BE4-7F7D-4187-9F18-3AD1AF3CC490}</Project>
+      <Name>PAS.AutoTest.PasATCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\PAS.AutoTest\PAS.AutoTest.TestCase\PAS.AutoTest.TestCase.csproj">
+      <Project>{254379F1-2734-4006-A719-D326FD6FDCC3}</Project>
+      <Name>PAS.AutoTest.TestCase</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\PAS.AutoTest\PAS.AutoTest.TestData\PAS.AutoTest.TestData.csproj">
+      <Project>{E1CC530A-83E7-475C-BB0D-40CDD4DBAC84}</Project>
+      <Name>PAS.AutoTest.TestData</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\PAS.AutoTest\PAS.AutoTest.TestUtility\PAS.AutoTest.TestUtility.csproj">
+      <Project>{A303754C-363F-4939-AE0A-BBD44734656F}</Project>
+      <Name>PAS.AutoTest.TestUtility</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PAS.AutoTest.ScriptRunner\PAS.AutoTest.ScriptRunner.csproj">
+      <Project>{D8918D45-A656-4EC6-9A74-7D9D0ACE8752}</Project>
+      <Name>PAS.AutoTest.ScriptRunner</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="FastCopy\FastCopy.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="FastCopy\FastExt1.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Mono_project_logo_svg.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

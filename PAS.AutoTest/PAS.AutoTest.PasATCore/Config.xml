@@ -1,16 +1,25 @@
 <Config>
   <ServiceWsdl>
-    <Wsdl Name="Acquisition">http://localhost:8080/pas/services/AcquisitionService?wsdl</Wsdl>
-    <Wsdl Name="Analysis">http://localhost:8080/pas/services/AnalysisService?wsdl</Wsdl>
-    <Wsdl Name="Application">http://localhost:8080/pas/services/ApplicationService?wsdl</Wsdl>
-    <Wsdl Name="Image">http://localhost:8080/pas/services/ImageService?wsdl</Wsdl>
-    <Wsdl Name="Patient">http://localhost:8080/pas/services/PatientService?wsdl</Wsdl>
-    <Wsdl Name="FMS">http://localhost:8080/pas/services/FMSService?wsdl</Wsdl>
-    <Wsdl Name="PresentationState">http://localhost:8080/pas/services/PresentationStateService?wsdl</Wsdl>
-    <Wsdl Name="Study">http://localhost:8080/pas/services/StudyService?wsdl</Wsdl>
-    <Wsdl Name="Import">http://localhost:8080/pas/services/ImportService?wsdl</Wsdl>
-    <Wsdl Name="SimpleInstance">http://localhost:8080/pas/services/SimpleInstanceService?wsdl</Wsdl>
-    <Wsdl Name="GenericInstance">http://localhost:8080/pas/services/GenericInstanceService?wsdl</Wsdl>    
-    <Wsdl Name="Radiolog">http://localhost:8080/pas/services/RadiologicalLogService?wsdl</Wsdl>
+    <Wsdl Name="Acquisition">http://localhost:52540/pas/services/AcquisitionService?wsdl</Wsdl>
+    <Wsdl Name="Analysis">http://localhost:52540/pas/services/AnalysisService?wsdl</Wsdl>
+    <Wsdl Name="Analysis3D">http://localhost:52540/pas/services/Analysis3DService?wsdl</Wsdl>
+    <Wsdl Name="Application">http://localhost:52540/pas/services/ApplicationService?wsdl</Wsdl>
+    <Wsdl Name="ApplicationV2">http://localhost:52540/pas/services/csdm/ApplicationService?wsdl</Wsdl>
+    <Wsdl Name="Image">http://localhost:52540/pas/services/ImageService?wsdl</Wsdl>
+    <Wsdl Name="ImageV2">http://localhost:52540/pas/services/csdm/ImageService?wsdl</Wsdl>
+    <Wsdl Name="Patient">http://localhost:52540/pas/services/PatientService?wsdl</Wsdl>
+    <Wsdl Name="PatientV2">http://localhost:52540/pas/services/csdm/PatientService?wsdl</Wsdl>
+    <Wsdl Name="FMS">http://localhost:52540/pas/services/FMSService?wsdl</Wsdl>
+    <Wsdl Name="PresentationState">http://localhost:52540/pas/services/PresentationStateService?wsdl</Wsdl>
+    <Wsdl Name="Study">http://localhost:52540/pas/services/StudyService?wsdl</Wsdl>
+    <Wsdl Name="Import">http://localhost:52540/pas/services/ImportService?wsdl</Wsdl>
+    <Wsdl Name="SimpleInstance">http://localhost:52540/pas/services/SimpleInstanceService?wsdl</Wsdl>
+    <Wsdl Name="SimpleInstanceV2">http://localhost:52540/pas/services/csdm/SimpleInstanceService?wsdl</Wsdl>
+    <Wsdl Name="GenericInstance">http://localhost:52540/pas/services/GenericInstanceService?wsdl</Wsdl>
+    <Wsdl Name="GenericInstanceV2">http://localhost:52540/pas/services/csdm/GenericInstanceService?wsdl</Wsdl>
+    <Wsdl Name="Radiolog">http://localhost:52540/pas/services/RadiologicalLogService?wsdl</Wsdl>
+    <Wsdl Name="Volume">http://localhost:52540/pas/services/VolumeService?wsdl</Wsdl>
+    <Wsdl Name="CrossSection">http://localhost:52540/pas/services/CrossSectionService?wsdl</Wsdl>
+    <Wsdl Name="FileService">http://localhost:52540/pas/services/FileService?wsdl</Wsdl>
   </ServiceWsdl>
 </Config>

@@ -1,0 +1,10 @@
+D:\DevRoot\csdm\Test_Pas\Autotest\Build\Debug\nc_sim.exe
+D:\DevRoot\csdm\Test_Pas\Autotest\Build\Debug\nc_sim.pdb
+D:\DevRoot\csdm\Test_Pas\Autotest\nc_sim\obj\Debug\ResolveAssemblyReference.cache
+D:\DevRoot\csdm\Test_Pas\Autotest\nc_sim\obj\Debug\nc_sim.exe
+D:\DevRoot\csdm\Test_Pas\Autotest\nc_sim\obj\Debug\nc_sim.pdb
+D:\DevRoot\csdm\Test_Pas\Autotest\Build\Release\nc_sim.exe
+D:\DevRoot\csdm\Test_Pas\Autotest\Build\Release\nc_sim.pdb
+D:\DevRoot\csdm\Test_Pas\Autotest\nc_sim\obj\Release\ResolveAssemblyReference.cache
+D:\DevRoot\csdm\Test_Pas\Autotest\nc_sim\obj\Release\nc_sim.exe
+D:\DevRoot\csdm\Test_Pas\Autotest\nc_sim\obj\Release\nc_sim.pdb
